@@ -1,0 +1,50 @@
+.action-bar-container {
+    width: 100%;
+    display: flex;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    top: 150px;
+}
+
+.mainarea-container {
+    display: flex;
+}
+
+.right-side-boards {
+    display: flex;
+    flex-wrap: wrap;
+    flex: 1 1 0%;
+    max-height: 100%;
+    max-width: 550px;    
+    margin-left: 10px;
+    justify-content: flex-end;
+    align-content: flex-start;
+
+    .opponent-board-container {
+        position: relative;
+        margin: 4px;
+        align-self: start;
+    }
+}
+
+.left-side-boards {
+    display: flex;
+    flex-wrap: wrap;
+    flex: 1 1 0%;
+    max-height: 100%;
+    max-width: 550px;    
+    margin-right: 10px;
+    justify-content: flex-start;
+    align-content: flex-start;
+
+    .opponent-board-container {
+        position: relative;
+        margin: 4px;
+        align-self: start;
+    }
+}
+
+.center-side-board{
+    display: flex;
+}

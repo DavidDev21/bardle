@@ -1,0 +1,73 @@
+
+<div class="home-container">
+    <div>
+        <a><button class="btn-container" (click)="createLobby()">Create Lobby</button></a>
+    </div>
+    <div class="join-btn-container">
+        <div class="join-input">
+            <input type="text" placeholder="JOIN GAME" #joinCode>
+        </div>
+        <a><button class="join-btn" (click)="joinGame(joinCode.value)"><svg class="join-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M342.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L274.7 256 105.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z"/></svg></button></a>
+    </div>
+    <div routerLink="/account" class="account-btn-container">
+        <div class="user-svg-container">
+            <svg *ngIf="!playerData?.email || !playerData?.playerName" class="user-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M224 256c70.7 0 128-57.3 128-128S294.7 0 224 0S96 57.3 96 128s57.3 128 128 128zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"/></svg>
+            <div *ngIf="playerData?.email && playerData?.playerName" class="user-letter"> {{playerData?.playerName[0]}}</div>
+        </div>
+        <div class="player-name-container">
+            {{playerData?.playerName}}
+        </div>
+        <div class="angle-container">
+            <svg class="angle-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M342.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L274.7 256 105.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z"/></svg>
+        </div>
+    </div>
+    <div>
+        <a ><button class="btn-container">Find a Game</button></a>
+    </div>
+    
+</div>
+
+
+
+<button type="button" class="btn btn-primary" (click)="openModal(template)">Create template modal</button>
+ 
+<ng-template #template>
+    <div class="modal-header game-summary-header">
+        <h4 class="modal-title game-summary-title">Game Summary</h4>
+        <h5 class="modal-title game-summary-title">You placed 2nd</h5>
+    </div>
+    <div class="modal-body game-summary-body">
+        <div class="placement-container">
+            <div *ngFor="let player of testData; let i = index">
+                <div class="placement-row" [ngClass]="{'highlight-player': player.playerId === currentPlayerId}">
+                    <div class="placement-number" [ngClass]="{'first-placement': i === 0, 'podium-placement': i===1||i==2}">
+                        #{{i+1}}
+                    </div>
+                    <div class="placement-player-label">
+                        {{player.playerId}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="stats-container">
+            <div class="stats-title">
+                <h5>Game Stats</h5>
+            </div>
+            <div class="stats-body">
+                You correctly guessed 5 / 10 words
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer game-summary-footer">
+        <button class="control-btn btn btn-primary">Leave Room</button>
+        <button class="control-btn btn btn-primary">Rematch</button>
+    </div>
+</ng-template>
+
+<div class="test">
+    <div class="progress">
+        <div class="progress-bar" role="progressbar" aria-label="Segment one" [style.width.%]="health / 100 <= 1 ? health % 100 : 100" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
+        <div *ngIf="health / 100 >= 1" class="progress-bar bg-success" role="progressbar" aria-label="Segment two" [style.width.%]="health / 100 <= 2 ? health % 100 : 100" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
+        <div *ngIf="health / 100 >= 2"class="progress-bar bg-info" role="progressbar" aria-label="Segment three" [style.width.%]="health / 100 <= 3 ? health % 100 : 100" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
+      </div>
+</div>

@@ -1,1 +1,118 @@
 /* You can add global styles to this file, and also import other style files */
+body {
+    font-family: 'Clear Sans', 'Helvetica Neue', Arial, sans-serif;
+    background-color: rgba(0,0,0,.95);
+    color: white;
+    box-sizing: border-box;
+
+}
+
+/*
+PENDING  = #0080FF
+PARTIAL = #c9b458
+WRONG = #787c7e
+RIGHT = #6aaa64
+*/
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.1);
+}
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.2);
+}
+// Modal CSS
+
+.game-summary-header {
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.game-summary-body {
+
+    .placement-container {
+        display: flex;
+        flex-direction: column;
+        max-height: 500px;
+        overflow-y: auto;
+        border-radius: 12px;
+        padding: 8px;
+        margin-bottom: 8px;
+
+        .highlight-player {
+            background-color: rgb(183 178 178);
+        }
+
+        .placement-row {
+            display: flex;
+            flex-direction: row;
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 12px;
+
+            .placement-number {
+                margin-right: 8px;
+                width: 48px;
+                background-color: rgb(46, 216, 60);
+                color: rgb(18, 18, 18);
+                font-size: 24px;
+                text-align: center;
+                border-radius: 8px;
+                align-items: center;
+                display: flex;
+                justify-content: center;
+            }
+    
+            .placement-player-label {
+                font-size: 24px;
+                display: flex;
+                -webkit-box-pack: start;
+                justify-content: flex-start;
+                white-space: nowrap;
+                -webkit-box-align: center;
+                align-items: center;
+                padding: 8px;
+                border-radius: 12px;
+            }
+
+            .first-placement {
+                background-color: rgb(98, 51, 226);
+            }
+
+            .podium-placement{
+                background-color: rgb(243, 212, 33);
+            }
+        }
+
+
+    }
+}
+
+.game-summary-footer {
+    display: flex;
+    justify-content: center;
+}
+
+.modal-content {
+    border-radius: 16px;
+    background-color: rgb(46 42 42);
+    color: rgba(0, 128, 255);
+}
+
+.control-btn {
+    width: 200px;
+}
+
+.vertical-stacked-btn {
+    width: 200px;
+    margin-bottom: 10px;
+}

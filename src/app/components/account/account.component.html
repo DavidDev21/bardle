@@ -1,0 +1,100 @@
+<div class="account-container">
+    <div class="username-container">
+        <a><button class="angle-btn" routerLink="/"><svg class="angle-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></button></a>
+        <div class="username-id">
+            <div class="user-svg-container">
+                <svg *ngIf="!playerData?.email || !playerData?.playerName" class="user-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M224 256c70.7 0 128-57.3 128-128S294.7 0 224 0S96 57.3 96 128s57.3 128 128 128zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"/></svg>
+                <div *ngIf="playerData?.email && playerData?.playerName" class="user-letter"> {{playerData?.playerName[0]}}</div>
+            </div>
+            <div class="player-name-container">
+                {{playerData?.playerName}}
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="!playerData?.email" class="login-register-container">
+        <form *ngIf="displayRegisterForm === false" [formGroup]="loginForm">
+            <div class="bardle-form-group">
+                <div class="form-group bardle-input">
+                    <input type="text" placeholder="EMAIL" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submittedLogin && loginFG['email'].errors }" />
+                    <div *ngIf="submittedLogin && loginFG['email'].errors" class="invalid-feedback">
+                        <div *ngIf="loginFG['email'].errors?.['required']">Email is required</div>
+                    </div>
+                </div>
+            </div>
+            <div class="bardle-form-group">
+                <div class="form-group bardle-input">
+                    <input type="password" placeholder="PASSWORD" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submittedLogin && loginFG['password'].errors }" />
+                    <div *ngIf="submittedLogin && loginFG['password'].errors" class="invalid-feedback">
+                        <div *ngIf="loginFG['password'].errors['required']">Password is required</div>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <form *ngIf="displayRegisterForm === true" [formGroup]="registerForm">
+            <div class="bardle-form-group">
+                <div class="form-group bardle-input">
+                    <input type="text" placeholder="DISPLAY NAME" formControlName="playerName" class="form-control" [ngClass]="{ 'is-invalid': submittedRegister && registerFG['playerName'].errors }" />
+                    <div *ngIf="submittedRegister && registerFG['playerName'].errors" class="invalid-feedback">
+                        <div *ngIf="registerFG['playerName'].errors['required']">playerName is required</div>
+                    </div>
+                </div>
+            </div>
+            <div class="bardle-form-group">
+                <div class="form-group bardle-input">
+                    <input type="text" placeholder="EMAIL" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submittedRegister && registerFG['email'].errors }" />
+                    <div *ngIf="submittedRegister && registerFG['email'].errors" class="invalid-feedback">
+                        <div *ngIf="registerFG['email'].errors?.['required']">Email is required</div>
+                    </div>
+                </div>
+            </div>
+            <div class="bardle-form-group">
+                <div class="form-group bardle-input">
+                    <input type="password" placeholder="PASSWORD" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submittedRegister && registerFG['password'].errors }" />
+                    <div *ngIf="submittedRegister && registerFG['password'].errors" class="invalid-feedback">
+                        <div *ngIf="registerFG['password'].errors['required']">Password is required</div>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <div class="action-bar-container">
+            <button [disabled]="loadingLogin || loadingRegister" class="btn-container login-btn" (click)="login()">
+                <span *ngIf="loadingLogin" class="spinner-border spinner-border-sm bardle-spin-margin"></span>
+                Login
+            </button>
+            <button [disabled]="loadingLogin || loadingRegister" class="btn-container register-btn" (click)="register()">
+                <span *ngIf="loadingRegister" class="spinner-border spinner-border-sm bardle-spin-margin"></span>
+                Register
+            </button>
+        </div>
+    </div>
+
+    <div *ngIf="playerData?.email" class="login-register-container">
+        <form [formGroup]="accountUpdateForm">
+            <div>
+                <h2>Change Display Name</h2>
+            </div>
+            <div class="bardle-form-group display-change-container">
+                <div class="form-group bardle-input edit-display-container">
+                    <input type="text" placeholder="DISPLAY NAME" formControlName="playerName" class="form-control" [ngClass]="{ 'is-invalid': submittedAccountUpdate && accountUpdateFG['playerName'].errors }"/>
+                    <div *ngIf="submittedAccountUpdate && accountUpdateFG['playerName'].errors" class="invalid-feedback">
+                        <div *ngIf="accountUpdateFG['playerName'].errors['required']">playerName is required</div>
+                    </div>
+                </div>
+                <button class="angle-btn" (click)="updateDisplayName()"><svg class="angle-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M342.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L274.7 256 105.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z"/></svg></button>
+            </div>
+            <div class="action-bar-container">
+                <button [disabled]="loadingLogin || loadingRegister" class="btn-container" (click)="logout()">
+                    <span *ngIf="loadingLogin" class="spinner-border spinner-border-sm bardle-spin-margin"></span>
+                    Logout
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+

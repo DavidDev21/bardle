@@ -1,0 +1,58 @@
+<div>
+    <div class="mainarea-container">
+        <!-- Left section -->
+        <div class="left-side-boards">
+            <div class="opponent-board-container" *ngFor="let opponent of leftSideBoards">
+                <app-nonplayer-board *ngIf="opponent?.playerId !== currentPlayerId" [playerBoard]="opponent"></app-nonplayer-board>
+            </div>
+        </div>
+        <!-- player board -->
+        <div class="center-side-board">
+            <app-letterboard [gameData]="gameData"></app-letterboard>
+        </div>
+
+        <!-- right section -->
+        <div class="right-side-boards">
+            <div class="opponent-board-container" *ngFor="let opponent of rightSideBoards">
+                <app-nonplayer-board *ngIf="opponent?.playerId !== currentPlayerId" [playerBoard]="opponent"></app-nonplayer-board>
+            </div>
+        </div>
+    </div>
+
+    <div class="action-bar-container"> 
+        <button class="control-btn btn btn-primary" (click)="leaveRoom()">Leave Room</button>
+    </div>
+</div>
+
+ <ng-template #summaryModal>
+  <div class="modal-header game-summary-header">
+      <h3 class="modal-title game-summary-title">Game Summary</h3>
+      <h5 class="modal-title game-summary-title">You placed {{ currentPlayerBoard?.placement + 1 | ordinal }} </h5>
+  </div>
+  <div *ngIf="playerBoardsData !== undefined" class="modal-body game-summary-body">
+      <div class="placement-container">
+          <div *ngFor="let player of playerBoardsData; let i = index">
+              <div class="placement-row" [ngClass]="{'highlight-player': player?.playerData?.playerId === currentPlayerId}">
+                  <div class="placement-number" [ngClass]="{'first-placement': i === 0, 'podium-placement': i===1||i==2}">
+                      #{{i+1}}
+                  </div>
+                  <div class="placement-player-label">
+                      {{player?.playerData?.playerName}}
+                  </div>
+              </div>
+          </div>
+      </div>
+      <div class="stats-container">
+          <div class="stats-title">
+              <h5>Game Stats</h5>
+          </div>
+          <div class="stats-body">
+              You correctly guessed {{currentPlayerBoard?.numCorrectGuess}} / {{gameData?.roomData?.config?.numberWords}} possible words
+          </div>
+      </div>
+  </div>
+  <div class="modal-footer game-summary-footer">
+      <button class="control-btn btn btn-primary" (click)="leaveRoom()">Leave Room</button>
+      <button class="control-btn btn btn-primary" (click)="rematch()">Rematch</button>
+  </div>
+</ng-template>

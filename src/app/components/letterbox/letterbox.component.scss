@@ -1,0 +1,37 @@
+.letterbox-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 64px;
+    width: 64px;
+    font-weight: 10px;
+    border: 2px solid #d3d6da;
+    text-transform: uppercase;
+    font-size: 2rem;
+    font-weight: bold;
+    box-sizing: border-box;
+
+    background-color: rgba(255, 255, 255, .2);
+}
+
+
+/*
+PENDING  = #0080FF
+PARTIAL = #c9b458
+WRONG = #787c7e
+CORRECT = #6aaa64
+*/
+
+.pending-state {
+    background-color: rgba(0, 128, 255,.60);
+}
+
+.partial-state {
+    background-color: rgba(201, 180, 88,.60);
+}
+.wrong-state {
+    background-color: rgba(120, 124, 126,.60);
+}
+.correct-state {
+    background-color: rgba(106, 170, 100,.60);
+}

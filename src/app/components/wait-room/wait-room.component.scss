@@ -1,0 +1,165 @@
+.lobby-code-container {
+    position: fixed;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 128, 255);
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 16px 32px;
+    transition: transform 0.2s ease 0s;
+    cursor: pointer;
+    user-select: none;
+
+    .lobby-code-header {
+        margin: 0px;
+        font-family: Proxima, sans-serif;
+        font-weight: 400;
+        font-size: 1rem;
+        line-height: 1.5;
+    }
+
+    .lobby-code-text {
+        margin: 0px;
+        font-family: Proxima, sans-serif;
+        font-weight: 400;
+        font-size: 2.125rem;
+        line-height: 1.235;
+    }
+}
+
+.room-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.room-container {
+    display: flex;
+    justify-content: space-around;
+    min-width: 600px;
+
+    .playerlist-container {
+        border: 3px solid rgba(0, 128, 255, 0.7);
+        height: 500px;
+        flex: 2 2 0;
+        min-width: 350px;
+        padding: 5px;
+        padding-top: 20px;
+        margin: 0 20px;
+
+        .player-row {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            .player-info {
+                display: flex;
+                align-items: center;
+                margin-right: 10px;
+                font-size: larger;
+                margin-left: 10px;
+                
+                .host-icon {
+                    width: 1.05rem;
+                    fill: yellow;
+                    margin-left: 10px;
+                }
+
+                .ready-icon {
+                    width: 1.05rem;
+                    fill: green;
+                    margin-left: 10px;
+                }
+            }
+
+            .highlight-player {
+                color: green;
+            }
+
+            .host-actions {
+                display: flex;
+                align-items: center;
+                .kick-btn {
+                    all: unset;
+
+                    &:hover {
+                        cursor: pointer;
+                        background-color: rgba(0, 128, 255, 0.7);
+                    }
+                }
+                .kick-icon {
+                    fill: red;
+                    width: 1.6rem;
+                    border: 1px solid rgba(0, 128, 255, 0.7);
+                    padding: 0px 3px;
+                }
+            }
+        }
+    }
+
+    .config-container {
+        flex: 1 1 0;
+        min-width: 250px;
+        border: red solid 3px;
+        padding: 5px;
+        padding-top: 20px;
+
+        .config-detail {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            .selector {
+                width: 65px;
+                display: flex;
+                align-items: center;
+            }
+        }
+    }
+
+    .action-bar-container {
+        flex: 1 1 0;
+        min-width: 250px;
+        padding: 5px;
+        border: yellow solid 3px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-top: 20px;
+
+        .control-btn {
+            width: 200px;
+            margin-bottom: 10px;
+        }
+    }
+}
+
+.loader-dots {
+    margin-left: 10px;
+    margin-right: 10px;
+    width: 20px; /* control the size */
+    aspect-ratio: 8/5;
+    --_g: no-repeat radial-gradient(#000 68%,#0000 71%);
+    -webkit-mask: var(--_g),var(--_g),var(--_g);
+    -webkit-mask-size: 25% 40%;
+    background: white;
+    animation: load 2s infinite;
+  }
+  
+  @keyframes load {
+    0%    {-webkit-mask-position: 0% 0%  ,50% 0%  ,100% 0%  }
+    16.67%{-webkit-mask-position: 0% 100%,50% 0%  ,100% 0%  }
+    33.33%{-webkit-mask-position: 0% 100%,50% 100%,100% 0%  }
+    50%   {-webkit-mask-position: 0% 100%,50% 100%,100% 100%}
+    66.67%{-webkit-mask-position: 0% 0%  ,50% 100%,100% 100%}
+    83.33%{-webkit-mask-position: 0% 0%  ,50% 0%  ,100% 100%}
+    100%  {-webkit-mask-position: 0% 0%  ,50% 0%  ,100% 0%  }
+  }
+  

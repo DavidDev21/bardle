@@ -1,0 +1,51 @@
+<div class="board-container">
+    <div class="main-gameboard-container" [ngClass] = "{'saturate-dark' : playerBoard?.health <= 0}">
+        <div class="playerinfo-container">
+            <div class="info-container">
+                <h5>{{playerBoard?.playerData?.playerName}} - {{playerBoard?.health > 0 ? playerBoard?.health : 0}} HP</h5>
+            </div>
+            <div class="health-bar-container">
+                <div class="progress">
+                    <div class="progress-bar" role="progressbar" aria-label="Segment one" [style.width.%]="playerBoard?.health / 100 <= 1 ? playerBoard?.health % 100 : 100" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
+                    <div *ngIf="playerBoard?.health / 100 >= 1" class="progress-bar bg-success" role="progressbar" aria-label="Segment two" [style.width.%]="playerBoard?.health / 100 <= 2 ? playerBoard?.health % 100 : 100" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
+                    <div *ngIf="playerBoard?.health / 100 >= 2"class="progress-bar bg-info" role="progressbar" aria-label="Segment three" [style.width.%]="playerBoard?.health / 100 <= 3 ? playerBoard?.health % 100 : 100" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
+                    <div *ngIf="playerBoard?.health / 100 >= 3"class="progress-bar bg-warning" role="progressbar" aria-label="Segment four" [style.width.%]="playerBoard?.health / 100 <= 4 ? playerBoard?.health % 100 : 100" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
+                  </div>
+            </div>
+        </div>
+        <div class="letterboard-container">
+            <div class="letterrow-container" *ngFor="let row of board; let r = index" #tryContainer>
+        
+                <div class="lettercol-container" *ngFor="let col of row; let c = index">        
+                    <div class="letterbox-container" [ngClass]="getLetterStateClass(r,c, col.state)">
+                        <label>{{col.letter}}</label>
+                    </div>        
+                </div>
+            </div>
+        </div>
+        
+        <div class="keyboard-container">
+            <div [class]="['keyboard-row' + i, 'keyboard-row'].join(' ')"
+                *ngFor="let row of keyboardRows; let i = index">
+                <div *ngFor="let key of row" [class]="getKeyClass(key)"
+                    [class.enter]="key === 'Enter'"
+                    [class.backspace]="key === 'Backspace'"
+                        (click)="handleKeyPress(key)">
+                    <div *ngIf="key !== 'Backspace'; else backspace">
+                      {{key}}
+                    </div>
+                    <ng-template #backspace>
+                        <img src="../assets/backspace.svg"/>
+                    </ng-template>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="dead-cross-container">
+        <svg *ngIf="playerBoard?.health <= 0" class="x-mark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M310.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 210.7 54.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L114.7 256 9.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 301.3 265.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L205.3 256 310.6 150.6z"/></svg>
+    </div>
+</div>
+
+
+
